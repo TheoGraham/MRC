@@ -26,7 +26,7 @@ OBJECT Codeunit 1 ApplicationManagement
 
     PROCEDURE CompanyOpen@30();
     BEGIN
-      LogInManagement.CompanyOpen();
+      LogInManagement.CompanyOpen(@temp);
     END;
 
     PROCEDURE GetSystemIndicator@51(VAR Text@1000 : Text[250];VAR Style@1001 : 'Standard,Accent1,Accent2,Accent3,Accent4,Accent5,Accent6,Accent7,Accent8,Accent9');
