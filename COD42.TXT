@@ -2,8 +2,9 @@ OBJECT Codeunit 42 CaptionManagement
 {
   OBJECT-PROPERTIES
   {
-    Date=12-09-07;
-    Time=12:00:00 PM;
+    Date=15-06-29;
+    Time=[ 5:49:53 PM];
+    Modified=Yes;
     Version List=NAVW17.00,NAVNA7.00;
   }
   PROPERTIES
@@ -142,6 +143,52 @@ OBJECT Codeunit 42 CaptionManagement
                     Language,DimOptionalParam1,DimOptionalParam2,
                     GLSetup."Shortcut Dimension 8 Code",
                     GLSetup.FIELDCAPTION("Shortcut Dimension 8 Code")));
+      //G2 - Added 9 - 15
+              '9':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 9 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 9 Code")));
+              '10':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 10 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 10 Code")));
+              '11':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 11 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 11 Code")));
+              '12':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 12 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 12 Code")));
+              '13':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 13 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 13 Code")));
+              '14':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 14 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 14 Code")));
+              '15':
+                EXIT(
+                  DimCodeCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 15 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 15 Code")));
+
+
+      //G2 END - Added 9 - 15
             END;
           '3':  // Filter Caption - Global Dimension using No. as Reference
             CASE DimCaptionRef OF
@@ -208,7 +255,56 @@ OBJECT Codeunit 42 CaptionManagement
                     Language,DimOptionalParam1,DimOptionalParam2,
                     GLSetup."Shortcut Dimension 8 Code",
                     GLSetup.FIELDCAPTION("Shortcut Dimension 8 Code")));
+      //G2 - Added 9 - 15
+              '9':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 9 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 9 Code")));
+              '10':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 10 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 10 Code")));
+              '11':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 11 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 11 Code")));
+              '12':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 12 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 12 Code")));
+              '13':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 13 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 13 Code")));
+              '14':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 14 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 14 Code")));
+              '15':
+                EXIT(
+                  DimFilterCaption(
+                    Language,DimOptionalParam1,DimOptionalParam2,
+                    GLSetup."Shortcut Dimension 15 Code",
+                    GLSetup.FIELDCAPTION("Shortcut Dimension 15 Code")));
+
+
+
+      //G2 END - Added 9 - 15
             END;
+
+
           '5':  // Code Caption - using Dimension Code as Reference
             BEGIN
               IF Dim.GET(DimCaptionRef) THEN

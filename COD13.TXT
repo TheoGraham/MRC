@@ -2,9 +2,10 @@ OBJECT Codeunit 13 Gen. Jnl.-Post Batch
 {
   OBJECT-PROPERTIES
   {
-    Date=13-12-02;
-    Time=12:00:00 PM;
-    Version List=NAVW17.10.00.35800,NAVNA7.10.00.35800;
+    Date=16-05-20;
+    Time=[ 5:23:17 AM];
+    Modified=Yes;
+    Version List=NAVW17.10.00.35800,NAVNA7.10.00.35800,SBS;
   }
   PROPERTIES
   {
@@ -100,6 +101,10 @@ OBJECT Codeunit 13 Gen. Jnl.-Post Batch
       Text031@1040 : TextConst 'ENU=Line No. %1 does not contain a G/L Account or Bank Account. When the %2 field contains an account number, either the %3 field or the %4 field must contain a G/L Account or Bank Account.;ESM=La l¡nea n§ %1 no incluye una cuenta o una cuenta bancaria. Si el campo %2 contiene un n£mero de cuenta, el campo %3 o el campo %4 deben contener una cuenta o una cuenta bancaria.;FRC=La ligne nø %1 ne contient pas de compte de grand livre ou de compte bancaire. Si le champ %2 contient un num‚ro de compte, le champ %3 ou le champ %4 doit contenir un compte de grand livre ou un compte bancaire.;ENC=Line No. %1 does not contain a G/L Account or Bank Account. When the %2 field contains an account number, either the %3 field or the %4 field must contain a G/L Account or Bank Account.';
       GLSetupFound@1079 : Boolean;
       RefPostingState@1002 : 'Checking lines,Checking balance,Updating bal. lines,Posting Lines,Posting revers. lines,Updating lines';
+      "---SBS Vars"@1000000001 : Integer;
+      PurchSetup@1000000000 : Record 312;
+      AutoEmailRemittance@1000000003 : Codeunit 50005;
+      SourceCodeSetup@1000000002 : Record 242;
 
     LOCAL PROCEDURE Code@7();
     VAR
@@ -285,6 +290,21 @@ OBJECT Codeunit 13 Gen. Jnl.-Post Batch
                 Text029,
                 "Document Type","Document No.","Posting Date");
           END;
+
+      //SBS>>
+          //  Email Auto Remittance if check exported and transmitted.
+      //    PurchSetup.GET;
+      //    SourceCodeSetup.GET;
+      //    IF (GenJnlLine."Check Exported") AND
+      //       (GenJnlLine."Check Transmitted") AND
+      //       ("Source Code" = SourceCodeSetup."Payment Journal") AND
+      //       (PurchSetup."Auto Email Remittance Advice") THEN BEGIN
+      //
+      //       AutoEmailRemittance.AutoEmailRemittance(GenJnlLine);
+      //
+      //    END;
+      //
+      //SBS<<
         UNTIL NEXT = 0;
         CheckBalance;
         CopyFields;

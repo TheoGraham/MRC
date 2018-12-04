@@ -2,9 +2,10 @@ OBJECT Codeunit 1 ApplicationManagement
 {
   OBJECT-PROPERTIES
   {
-    Date=14-01-21;
-    Time=12:00:00 PM;
-    Version List=NAVW17.10.00.36035;
+    Date=14-09-23;
+    Time=[ 4:41:14 PM];
+    Modified=Yes;
+    Version List=NAVW17.10.00.36035,SCRIBE;
   }
   PROPERTIES
   {
@@ -166,50 +167,80 @@ OBJECT Codeunit 1 ApplicationManagement
     VAR
       IntegrationManagement@1005 : Codeunit 5150;
       ChangeLogMgt@1006 : Codeunit 423;
+      ScribePublisher@1000000001 : Codeunit 14094202;
     BEGIN
       ChangeLogMgt.GetDatabaseTableTriggerSetup(TableId,OnDatabaseInsert,OnDatabaseModify,OnDatabaseDelete,OnDatabaseRename);
 
       IntegrationManagement.GetDatabaseTableTriggerSetup(TableId,OnDatabaseInsert,OnDatabaseModify,OnDatabaseDelete,OnDatabaseRename);
+
+      //****Scribe Begins *****
+      ScribePublisher.GetTableTriggerSetup(TableId,OnDatabaseInsert, OnDatabaseModify,OnDatabaseDelete,OnDatabaseRename);
+      //****Scribe Ends *****
     END;
 
     PROCEDURE OnDatabaseInsert@26(RecRef@1000 : RecordRef);
     VAR
       IntegrationManagement@1001 : Codeunit 5150;
       ChangeLogMgt@1002 : Codeunit 423;
+      ScribePublisher@1000000001 : Codeunit 14094202;
     BEGIN
       ChangeLogMgt.LogInsertion(RecRef);
 
       IntegrationManagement.OnDatabaseInsert(RecRef);
+
+      //****Scribe Begins *****
+      ScribePublisher.PublishInsertion(RecRef);
+      //****Scribe Ends *****
     END;
 
     PROCEDURE OnDatabaseModify@27(RecRef@1000 : RecordRef);
     VAR
       IntegrationManagement@1001 : Codeunit 5150;
       ChangeLogMgt@1002 : Codeunit 423;
+      xRecRef@1000000001 : RecordRef;
+      ScribePublisher@1000000002 : Codeunit 14094202;
     BEGIN
+      // *****Scribe Begins*****
+      xRecRef.GET(RecRef.RECORDID);
+      //*****Scribe Ends*****
+
       ChangeLogMgt.LogModification(RecRef);
 
       IntegrationManagement.OnDatabaseModify(RecRef);
+
+      //****Scribe Begins *****
+      ScribePublisher.PublishModification(RecRef,xRecRef);
+      //****Scribe Ends *****
     END;
 
     PROCEDURE OnDatabaseDelete@28(RecRef@1000 : RecordRef);
     VAR
       IntegrationManagement@1001 : Codeunit 5150;
       ChangeLogMgt@1002 : Codeunit 423;
+      ScribePublisher@1000000001 : Codeunit 14094202;
     BEGIN
       ChangeLogMgt.LogDeletion(RecRef);
 
       IntegrationManagement.OnDatabaseDelete(RecRef);
+
+      //****Scribe Begins *****
+      ScribePublisher.PublishDeletion(RecRef);
+      //****Scribe Ends *****
     END;
 
     PROCEDURE OnDatabaseRename@29(RecRef@1000 : RecordRef;xRecRef@1001 : RecordRef);
     VAR
       IntegrationManagement@1002 : Codeunit 5150;
       ChangeLogMgt@1003 : Codeunit 423;
+      ScribePublisher@1000000001 : Codeunit 14094202;
     BEGIN
       ChangeLogMgt.LogRename(RecRef,xRecRef);
 
       IntegrationManagement.OnDatabaseRename(RecRef,xRecRef);
+
+      //****Scribe Begins *****
+      ScribePublisher.PublishRename(RecRef,xRecRef);
+      //****Scribe Ends *****
     END;
 
     PROCEDURE OnDebuggerBreak@55(ErrorMessage@1000 : Text);
